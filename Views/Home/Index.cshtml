@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Fitness Master</h1>
+    <br />
+    <br />
+    <a asp-controller="Exercise" asp-action="Create" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> &nbsp; Add new Exercise Record
+    </a>
+    <br />
+    <br />
+    <a asp-controller="CheatMeal" asp-action="Create" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> &nbsp; Add new Cheat Meal
+    </a>
+    <br />
+    <br />
+    <a asp-controller="Report" asp-action="Index" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> &nbsp; Generate Report
+    </a>
+</div>

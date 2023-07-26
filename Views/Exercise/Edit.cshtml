@@ -1,0 +1,44 @@
+﻿@using static FitnessMaster.Models.Exercise;
+@model Exercise
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<form method="post">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Edit Exercise Record</h2>
+			<hr />
+		</div>
+		<div asp-validation-summary="All"></div>
+		<div class="mb-3">
+			<label asp-for="Name"></label>
+			<select asp-for="Name" asp-items="Html.GetEnumSelectList<ExerciseType>()">
+				<option selected="selected" value="">Please select</option>
+			</select>
+			<span asp-validation-for="Name" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="CreatedDate"></label>
+			<input asp-for="CreatedDate" class="form-control" textmode="DateTime" />
+			<span asp-validation-for="CreatedDate" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Duration"></label>
+			<input asp-for="Duration" class="form-control" />
+			<span asp-validation-for="Duration" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-primary" style="width:150px">Save Changes</button>
+		<a asp-controller="Exercise" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			Back to List
+		</a>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}
+

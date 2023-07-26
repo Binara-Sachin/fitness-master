@@ -1,0 +1,42 @@
+﻿@using FitnessMaster.Data;
+
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    DateTime timeAfter = DateTime.Now.AddDays(-7);
+
+    List<Exercise> exerciseRecordList = ExerciseDataStore.ExerciseRecordsList.Values.ToList();
+    List<Exercise> exercisesForLastweek = exerciseRecordList.Where(i => i.CreatedDate >= timeAfter).ToList();
+    int noOfExerciseRecords = exercisesForLastweek.Count;
+    int caloriesBurned = 0;
+
+    foreach (Exercise e in exercisesForLastweek)
+    {
+        caloriesBurned += e.CaloriesBurned;
+    }
+
+    List<CheatMeal> cheatMealRecordList = CheatMealDataStore.CheatMealRecordsList.Values.ToList();
+    List<CheatMeal> cheatMealsForLastweek = cheatMealRecordList.Where(i => i.CreatedDate >= timeAfter).ToList();
+    int noOfCheatMealRecords = cheatMealRecordList.Count;
+
+    int caloriesGained = 0;
+
+    foreach (CheatMeal e in cheatMealsForLastweek)
+    {
+        caloriesGained += e.CaloriesGained;
+    }
+
+    int netCaloryBurn = caloriesBurned - caloriesGained;
+    double weightDiff = netCaloryBurn * 0.45 / 3500;
+}
+<h1>Report for the Past Week</h1>
+<br />
+<p>No of Exercise Records This Week: @noOfExerciseRecords</p>
+<p>No of Cheat Meals This Week: @noOfCheatMealRecords</p>
+<br />
+<p>Total Calories Burned This Week: @caloriesBurned</p>
+<p>Total Calories Gained This Week: @caloriesGained</p>
+<p>Net Calories Burned(+)/Gained(-) This Week: @netCaloryBurn</p>
+<p>Net Weight Loss(+)/Gain(-) This Week: @Math.Round(weightDiff, 2) kg</p>
+
